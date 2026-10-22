@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    TIPOGRAFÍA — Golden Ratio (φ = 1.618) con base 8px:
+        φ¹ = 13px  →  contador (lblContador) y temporizador (lblTiempo)
+        φ²  = 21px  →  botones de opción
+        φ³  = 34px  →  enunciado de la pregunta (lblPregunta)
+
+    BOTONES — Gradiente Kahoot a 135° con vecino de 60° en rueda de color:
+        Rojo    (#E21B3C, hue 348°) → Naranja  (#E87722, hue ~28°, Δ=+40°~60°)
+        Azul    (#1368CE, hue 214°) → Morado   (#7B2FBE, hue 274°, Δ=+60°)
+        Amarillo (#D89E00, hue 44°) → Verde-lima (#8FB300, hue 82°, Δ=+38°~60°)
+        Verde   (#26890C, hue 108°) → Cian-azul (#009B8D, hue 168°, Δ=+60°)
+
+    RESALTADO al responder (gestionado desde SecondaryController.java):
+        ✓ Correcto  →  borde grueso verde  #26890C
+        ✗ Incorrecto → borde grueso rojo   #E21B3C
+-->
+<VBox alignment="CENTER" spacing="18.0"
+    xmlns="http://javafx.com/javafx/11"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.SecondaryController"
+    style="-fx-background-color: #1a1a2e;" prefWidth="800.0" prefHeight="600.0">
+
+    <children>
+        <!-- StackPane para la fila superior: contador a la izquierda, temporizador en el centro -->
+        <StackPane maxWidth="Infinity">
+            <children>
+                <!-- * Contador de pregunta a la izquierda (φ¹ = 13px) -->
+                <Label fx:id="lblContador" text="Pregunta: 1 / 15" StackPane.alignment="CENTER_LEFT"
+                    style="-fx-font-size: 13px; -fx-text-fill: #a0a0c0; -fx-font-weight: bold;" />
+                <!-- * Temporizador en el centro (φ² = 21px) -->
+                <Label fx:id="lblTiempo" text="20s" StackPane.alignment="CENTER"
+                    style="-fx-font-size: 21px; -fx-text-fill: #ffd700; -fx-font-weight: bold;" />
+            </children>
+        </StackPane>
+
+        <!-- Barra de progreso: ancho completo, debajo del contador/tiempo -->
+        <ProgressBar fx:id="progressBar" progress="0.0" maxWidth="Infinity" prefHeight="14.0"
+            style="-fx-accent: #1368CE;" />
+
+        <!-- φ³ = 34px — Enunciado de la pregunta -->
+        <Label fx:id="lblPregunta" text="" wrapText="true" maxWidth="720.0" alignment="CENTER"
+            style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white; -fx-text-alignment: center;" />
+
+        <!-- Cuadrícula 2x2 de opciones estilo Kahoot -->
+        <GridPane hgap="15.0" vgap="15.0" alignment="CENTER" maxWidth="Infinity">
+            <columnConstraints>
+                <ColumnConstraints minWidth="10.0" hgrow="ALWAYS" />
+                <ColumnConstraints minWidth="10.0" hgrow="ALWAYS" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="90.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="90.0" vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <!--
+                    Opción 1 — ROJO Kahoot (#E21B3C)
+                    Gradiente 135° → vecino +60° = Naranja (#E87722)
+                    from 100% 0% to 0% 100% = dirección 135° en JavaFX
+                -->
+                <Button fx:id="btnOpcion1" text="" wrapText="true" onAction="#responder"
+                    maxWidth="Infinity" maxHeight="Infinity"
+                    style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: white;
+                               -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #E21B3C, #E87722);
+                               -fx-background-radius: 10px; -fx-cursor: hand;
+                               -fx-border-color: transparent; -fx-border-width: 5px; -fx-border-radius: 10px;"
+                    GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                <!--
+                    Opción 2 — AZUL Kahoot (#1368CE)
+                    Gradiente 135° → vecino +60° = Morado (#7B2FBE)
+                -->
+                <Button fx:id="btnOpcion2" text="" wrapText="true" onAction="#responder"
+                    maxWidth="Infinity" maxHeight="Infinity"
+                    style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: white;
+                               -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #1368CE, #7B2FBE);
+                               -fx-background-radius: 10px; -fx-cursor: hand;
+                               -fx-border-color: transparent; -fx-border-width: 5px; -fx-border-radius: 10px;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <!--
+                    Opción 3 — AMARILLO Kahoot (#D89E00)
+                    Gradiente 135° → vecino +60° = Verde-lima (#8FB300)
+                -->
+                <Button fx:id="btnOpcion3" text="" wrapText="true" onAction="#responder"
+                    maxWidth="Infinity" maxHeight="Infinity"
+                    style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: white;
+                               -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #D89E00, #8FB300);
+                               -fx-background-radius: 10px; -fx-cursor: hand;
+                               -fx-border-color: transparent; -fx-border-width: 5px; -fx-border-radius: 10px;"
+                    GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                <!--
+                    Opción 4 — VERDE Kahoot (#26890C)
+                    Gradiente 135° → vecino +60° = Cian-teal (#009B8D)
+                -->
+                <Button fx:id="btnOpcion4" text="" wrapText="true" onAction="#responder"
+                    maxWidth="Infinity" maxHeight="Infinity"
+                    style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: white;
+                               -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #26890C, #009B8D);
+                               -fx-background-radius: 10px; -fx-cursor: hand;
+                               -fx-border-color: transparent; -fx-border-width: 5px; -fx-border-radius: 10px;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+    </children>
+
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="20.0" />
+    </padding>
+</VBox>

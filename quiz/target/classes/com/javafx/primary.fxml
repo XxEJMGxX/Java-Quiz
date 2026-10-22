@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<!--
+    TIPOGRAFÍA — Golden Ratio (φ = 1.618) con base 8px:
+        φ¹ = 13px  →  etiquetas pequeñas / subtítulos
+        φ²  = 21px  →  botones / inputs / cuerpo
+        φ³  = 34px  →  título principal
+-->
+<VBox alignment="CENTER" spacing="20.0"
+    xmlns="http://javafx.com/javafx/11"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.PrimaryController"
+    style="-fx-background-color: #1a1a2e;">
+
+    <children>
+        <!-- φ³ = 34px — Título principal -->
+        <Label text="JavaQuiz"
+            style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+        <!-- φ¹ = 13px — Subtítulo -->
+        <Label text="Edición DAW · Demuestra lo que sabes"
+            style="-fx-font-size: 13px; -fx-text-fill: #a0a0c0;" />
+
+        <!-- φ¹ = 13px — Etiqueta del campo -->
+        <Label text="Introduce tu nombre para comenzar:"
+            style="-fx-font-size: 13px; -fx-text-fill: #c8c8e0;" />
+
+        <!-- φ² = 21px — Campo de texto -->
+        <TextField fx:id="txtJugador" maxWidth="320.0" promptText="Tu nombre..."
+            style="-fx-font-size: 21px; -fx-background-color: #2a2a4a; -fx-text-fill: white;
+                          -fx-prompt-text-fill: #6060a0; -fx-border-color: #4040aa; -fx-border-radius: 6px;
+                          -fx-background-radius: 6px; -fx-padding: 8px;" />
+
+        <!-- φ² = 21px — Botón principal de inicio -->
+        <Button text="¡Empezar Quiz!" onAction="#switchToSecondary" prefWidth="220.0"
+            style="-fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: white;
+                       -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #1368CE, #7B2FBE);
+                       -fx-background-radius: 8px; -fx-cursor: hand; -fx-padding: 10px 20px;" />
+
+        <!-- φ¹ = 13px — Botones secundarios -->
+        <HBox alignment="CENTER" spacing="15.0">
+            <children>
+                <Button text="📊 Ver puntuaciones" onAction="#verPuntuaciones" prefWidth="175.0"
+                    style="-fx-font-size: 13px; -fx-text-fill: white;
+                               -fx-background-color: #2a2a4a; -fx-border-color: #4040aa;
+                               -fx-border-radius: 6px; -fx-background-radius: 6px;
+                               -fx-cursor: hand; -fx-padding: 8px;" />
+                <Button text="⧽ Pantalla completa" onAction="#alternarPantallaCompleta"
+                    prefWidth="175.0"
+                    style="-fx-font-size: 13px; -fx-text-fill: white;
+                               -fx-background-color: #2a2a4a; -fx-border-color: #4040aa;
+                               -fx-border-radius: 6px; -fx-background-radius: 6px;
+                               -fx-cursor: hand; -fx-padding: 8px;" />
+                <Button text="✕ Salir" onAction="#salir" prefWidth="110.0"
+                    style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white;
+                               -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #E21B3C, #E87722);
+                               -fx-background-radius: 6px; -fx-cursor: hand; -fx-padding: 8px;" />
+            </children>
+        </HBox>
+    </children>
+
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+</VBox>
